@@ -1,32 +1,47 @@
+require "prime.rb"
+
+def next_prime_factor(x)
+  return x if Prime.prime?(x)
+  possibles = (2..x/2)
+  possibles.each do |p|
+    return p if Prime.prime?(p) && x % p == 0
+  end
+  1
+end
+
+def prime_factors(x)
+  factor_list = []
+  remainder = x
+  while remainder > 1
+    highest_factor = highest_prime_factor(remainder)
+    factor_list << highest_factor
+    remainder = remainder/highest_factor
+  end
+  factor_list
+end
+
+def count_instances(array)
+  array.each_with_object(Hash.new(0)) {|n, counts| counts[n] += 1 }.values
+end
+
+def divisor_count(x)
+  factors = prime_factors(x)
+  count_of_factors = count_instances(factors)
+  count_of_factors.inject(1) {|product, n| product * (n + 1)}
+end
+
 def triangle_no(x)
   (1..x).to_a.inject(:+)
 end
 
-def divisor_count(x)
-  count = 2
-  possibles = (2..(x/2 + 1)).to_a
-  ##possibles.count{|p| x % p == 0} + 2
-  #test_num = possibles.first
-  #count += 2 if x % test_num == 0
-  #possibles = 3..(x/3 +1)
-
-  while possibles.length > 2 do
-    num = possibles[0]
-    count += 2 if x % num == 0
-    next_num = possibles[1]
-    possibles = (next_num..(x/next_num + 1)).to_a
-  end
-  count
-end
 
 def highly_divisible_triangle_number(check)
-  x = 2
+  x = check
   result = 2
   while result < check do
     x += 1
     tn = triangle_no(x)
     result = divisor_count(tn)
-    puts "result: #{result} x: #{x} triangle no:#{tn}"
   end
   tn
 end

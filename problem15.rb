@@ -17,7 +17,7 @@ class GridPath
   def traversable_paths(row = 0, col = 0)
     count = 0
     available_paths = paths(row,col)
-    puts "row:#{row}, col:#{col} available_paths:#{available_paths.to_s}"
+    #puts "row:#{row}, col:#{col} available_paths:#{available_paths.to_s}"
     available_paths.each do |path|
       next_row = row + path[0]
       next_col = col + path[1]
@@ -29,3 +29,4 @@ class GridPath
 end
 
 gp = GridPath.new(3,3)
+gp.traversable_paths

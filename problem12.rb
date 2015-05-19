@@ -13,7 +13,7 @@ def prime_factors(x)
   factor_list = []
   remainder = x
   while remainder > 1
-    highest_factor = highest_prime_factor(remainder)
+    highest_factor = next_prime_factor(remainder)
     factor_list << highest_factor
     remainder = remainder/highest_factor
   end

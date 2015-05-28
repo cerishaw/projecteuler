@@ -20,5 +20,5 @@ def power_digits(power, limit)
     total += i if sum == i
     i += 1
   end
-  sum
+  total
 end
